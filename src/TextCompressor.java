@@ -22,14 +22,38 @@
  ******************************************************************************/
 
 /**
- *  The {@code TextCompressor} class provides static methods for compressing
+ *
+ * Best thing to do is choose most Feasible option and then pursue the most simple version of that algorithm, and restart
+ * as needed after pursuing that option.
+ *
+ * The {@code TextCompressor} class provides static methods for compressing
  *  and expanding natural language through textfile input.
  *
  *  @author Zach Blick, Damian Villarreal-Ayala
+ *
+ *  - Ideas for patterns & ways to compress:
+ *  Based on different pre- & suffixes
+ *  Letter pairings
+ *  Words
+ *  - including spaces around words? (if present)
+ *  - Avoid fixed-length sequences bc it's not that flexible (maybe window of 3...)
+ *  - n-squared algorithms and larger won't work because it starts to become prohibitive
+ *  Codes(n) <-> Letters (6)<-> ASCII (2 escape codes per state?)
+ *  2^n
+ *
+ * Would it make sense to read thorugh file, save the most freq. appearing words, and then use MFA words to compress?
+ * - As list of words runs out, refresh list of MFA words? - Save list of words as file is initially being read through
  */
+
 public class TextCompressor {
 
     private static void compress() {
+        /**
+         * To begin, start by reading in using either a window of 3 or by focusing most frequently used words in first 100.
+         * A header is gonna be needed
+         * Read in each char and
+         */
+        char test = BinaryStdIn.readChar();
 
         // TODO: Complete the compress() method
 
@@ -37,7 +61,9 @@ public class TextCompressor {
     }
 
     private static void expand() {
-
+        /**
+         *
+         */
         // TODO: Complete the expand() method
 
         BinaryStdOut.close();
