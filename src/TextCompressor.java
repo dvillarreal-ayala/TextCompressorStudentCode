@@ -32,6 +32,8 @@
  *  @author Zach Blick, Damian Villarreal-Ayala
  *
  *  - Ideas for patterns & ways to compress:
+ *  - Pattern-idea:
+ *
  *  Based on different pre- & suffixes
  *  Letter pairings
  *  Words
@@ -43,6 +45,23 @@
  *
  * Would it make sense to read thorugh file, save the most freq. appearing words, and then use MFA words to compress?
  * - As list of words runs out, refresh list of MFA words? - Save list of words as file is initially being read through
+ * - As the list of words runs out, the textfile will become empty
+ *
+ * ASCII values for null, beginning and end of alpha
+ * 0 - null
+ * 1 - [START OF HEADING]
+ * 2 - [START OF TEXT]
+ * 3 - [END OF TEXT]
+ * 11 - [VERTICAL TAB] - does this mean a break line when u press shift? would removing even help compress?
+ * 32 - [SPACE] - doesn't print anything out
+ * 65 - A
+ * 90 - Z
+ * 97 - a
+ * 122 - z
+ *
+ * Would it make sense to assign a number to each char as a signifier of how many times they appear?
+ * if the char appears more than once in subsequent order, replace subsequent chars with number of chars - 1.
+ * Does it make more sense to compress spaces and line breaks at the end? Feel like it'll make compressing letters hard.
  */
 
 public class TextCompressor {
@@ -54,6 +73,7 @@ public class TextCompressor {
          * Read in each char and
          */
         char test = BinaryStdIn.readChar();
+
 
         // TODO: Complete the compress() method
 
