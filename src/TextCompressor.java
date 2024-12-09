@@ -54,10 +54,10 @@
  * 3 - [END OF TEXT]
  * 11 - [VERTICAL TAB] - does this mean a break line when u press shift? would removing even help compress?
  * 32 - [SPACE] - doesn't print anything out
- * 65 - A
- * 90 - Z
- * 97 - a
- * 122 - z
+ * 65 - A - 41
+ * 90 - Z - 5A
+ * 97 - a - 61
+ * 122 - z - 7A
  *
  * Would it make sense to assign a number to each char as a signifier of how many times they appear?
  * if the char appears more than once in subsequent order, replace subsequent chars with number of chars - 1.
@@ -68,19 +68,30 @@ public class TextCompressor {
 
     private static void compress() {
         /**
-         * To begin, start by reading in using either a window of 3 or by focusing most frequently used words in first 100.
-         * A header is gonna be needed
          * Read in each char and
          */
+        //EOF should be 256
+
         String text = BinaryStdIn.readString();
+        String word = " ";
         int index = 0;
 
+        String [] dict = new String[256];
+
+        //Go through the length of the text
         while (index < text.length())
         {
             //Write into this while loop using LZW Compression
-            //p
-            int prefix = 0;
+            //Gives prefix the starting char
+            char prefix = text.charAt(index);
 
+            if(prefix != '')
+            {
+                word += prefix;
+            }
+
+
+            index += prefix.length();
         }
 
 
