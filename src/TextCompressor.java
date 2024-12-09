@@ -72,7 +72,16 @@ public class TextCompressor {
          * A header is gonna be needed
          * Read in each char and
          */
-        char test = BinaryStdIn.readChar();
+        String text = BinaryStdIn.readString();
+        int index = 0;
+
+        while (index < text.length())
+        {
+            //Write into this while loop using LZW Compression
+            //p
+            int prefix = 0;
+
+        }
 
 
         // TODO: Complete the compress() method
