@@ -66,37 +66,54 @@
 
 public class TextCompressor {
 
+    static  final int EOF = 256;
+    //code-size should be size 12
+
+//    index = 0
+//            while index < text.length:
+//    prefix = longest coded word that matches text @ index
+//    write out that code
+//	if possible, look ahead to the next character
+//    append that character to prefix
+//    associate prefix with the next code (if available)
+//    index += prefix.length
+//    write out EOF and close
     private static void compress() {
-        /**
-         * Read in each char and
-         */
-        //EOF should be 256
+
+        TST tst = new TST();
+        //Fill in the first  256 values
+        for (int i = 0; i < 256; i++)
+        {
+            //Casting an int as a char will return the character version of it.
+            //Insert requires a String input, so put an empty String ("") + the casted char/int so that it gets added onto the String.
+            tst.insert("" + (char)i, i);
+        }
 
         String text = BinaryStdIn.readString();
-        String word = " ";
         int index = 0;
-
-        String [] dict = new String[256];
 
         //Go through the length of the text
         while (index < text.length())
         {
-            //Write into this while loop using LZW Compression
             //Gives prefix the starting char
-            char prefix = text.charAt(index);
+            String prefix = tst.getLongestPrefix(text.substring((index)));
+            //Returns associated code, if there is no associated code then returns EMPTY
+            int code = tst.lookup(prefix);
+            BinaryStdOut.write(code, 12);
 
-            if(prefix != '')
+            if(index + prefix.length() < text.length())
             {
-                word += prefix;
+                prefix += text.charAt(index + prefix.length());
+                tst.insert(prefix, code);
+                code++;
             }
-
-
             index += prefix.length();
         }
 
 
         // TODO: Complete the compress() method
 
+        BinaryStdOut.write(EOF, 12);
         BinaryStdOut.close();
     }
 
@@ -104,6 +121,9 @@ public class TextCompressor {
         /**
          *
          */
+
+        //Try to use a map so that when given a code, we can have constant time looksups
+
         // TODO: Complete the expand() method
 
         BinaryStdOut.close();
