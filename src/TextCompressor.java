@@ -78,10 +78,11 @@ public class TextCompressor {
 //    associate prefix with the next code (if available)
 //    index += prefix.length
 //    write out EOF and close
+
     private static void compress() {
 
         TST tst = new TST();
-        //Fill in the first  256 values
+        //Fill in the first  256 values, including extended ASCII
         for (int i = 0; i < 256; i++)
         {
             //Casting an int as a char will return the character version of it.
@@ -122,7 +123,7 @@ public class TextCompressor {
          *
          */
 
-        //Try to use a map so that when given a code, we can have constant time looksups
+        //Try to use a map so that when given a code, we can have constant time lookups
 
         // TODO: Complete the expand() method
 
