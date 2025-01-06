@@ -65,7 +65,8 @@
  */
 
 public class TextCompressor {
-
+// Maximum code should be 4096.
+    static final int NUM_ASCII_CHARS = 256;
     static  final int EOF = 256;
     //code-size should be size 12
 
@@ -83,13 +84,18 @@ public class TextCompressor {
 
         TST tst = new TST();
         //Fill in the first  256 values, including extended ASCII
-        for (int i = 0; i < 256; i++)
+        for (int i = 0; i < NUM_ASCII_CHARS; i++)
         {
             //Casting an int as a char will return the character version of it.
             //Insert requires a String input, so put an empty String ("") + the casted char/int so that it gets added onto the String.
             tst.insert("" + (char)i, i);
         }
-
+        /**
+         * At this point, the first 255 values are filled with the entire ASCII table, including
+         * extended ASCII, and the 256th value is the EOF.
+         * Track to make sure code doesn't go past the Maximum code. At that point, it should stop being added to the TST.
+         */
+//        int compressionCodes = 257;
         String text = BinaryStdIn.readString();
         int index = 0;
 
@@ -97,7 +103,7 @@ public class TextCompressor {
         while (index < text.length())
         {
             //Gives prefix the starting char
-            String prefix = tst.getLongestPrefix(text.substring((index)));
+            String prefix = tst.getLongestPrefix(text,index);
             //Returns associated code, if there is no associated code then returns EMPTY
             int code = tst.lookup(prefix);
             BinaryStdOut.write(code, 12);
@@ -106,11 +112,10 @@ public class TextCompressor {
             {
                 prefix += text.charAt(index + prefix.length());
                 tst.insert(prefix, code);
-                code++;
+//              compressionCodes++;
             }
             index += prefix.length();
         }
-
 
         // TODO: Complete the compress() method
 
@@ -120,12 +125,29 @@ public class TextCompressor {
 
     private static void expand() {
         /**
-         *
+         *Check with worksheet from class;
+         * When expanding, coming across an unfamiliar code means it's the next code.
+         * Try to use a map so that when given a code, we can have constant time lookups
          */
 
-        //Try to use a map so that when given a code, we can have constant time lookups
-
         // TODO: Complete the expand() method
+        // Create a map for codes to strings size of the maximum code
+
+        // Initialize the table up to the EOF
+
+        //current string should the table[current code]
+
+        // Read first input to see if it's EOF
+        int input = BinaryStdIn.readInt(12);
+        //if EOF...
+
+        //While current code isn't EOF..
+            // if the current code is less than highest code, new string should table[currentcode]
+
+            // Handle edge case where code is for current string being defined
+
+            // Add string to table if theres room, then set curring string to the new string
+
 
         BinaryStdOut.close();
     }
